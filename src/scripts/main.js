@@ -1,8 +1,9 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll('[data-tab-button]');
+    const questions = document.querySelectorAll('[data-faq-question]');
 
     for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function(e) {
+        buttons[i].addEventListener('click', function (e) {
             e.preventDefault();
             const tabTarget = e.target.dataset.tabButton;
             const tab = document.querySelector(`[data-tab-id=${tabTarget}]`);
@@ -12,7 +13,18 @@ document.addEventListener("DOMContentLoaded", function() {
             e.target.classList.add('shows__tabs__button--is-active');
         })
     };
+
+    for (let i = 0; i < questions.length; i++) {
+        questions[i].addEventListener('click', openOrCloseAnswer);
+    }
 })
+
+function openOrCloseAnswer(element) {
+    const class1 = 'faq__questions__item--is-open';
+    const parentElement = element.target.parentNode;
+
+    parentElement.classList.toggle(class1);
+}
 
 function removeActiveButton() {
     const buttons = document.querySelectorAll('[data-tab-button]');
@@ -25,7 +37,7 @@ function removeActiveButton() {
 function hideAllTabs() {
     const tabsContainer = document.querySelectorAll('[data-tab-id]');
 
-    for(let i = 0; i < tabsContainer.length; i++) {
+    for (let i = 0; i < tabsContainer.length; i++) {
         tabsContainer[i].classList.remove('shows__list--is-active');
     };
 }
