@@ -147,6 +147,16 @@ body {
         display: block;
     }
 
+    @media (min-width: 769px) and (max-width: 1023px) {
+        .title {
+            @include title(22px);
+        }
+
+        .text--big {
+            @include title(16px);
+        }
+    }
+
     img {
         max-width: 100%;
     }
