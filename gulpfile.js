@@ -6,8 +6,8 @@ const obfuscate = require('gulp-obfuscate');
 
 function compileSass() {
     return gulp.src('./src/styles/*.scss')
-    .pipe(sass({ outputStyle: 'compressed' }))
-    .pipe(gulp.dest('./dist/styles/'));
+        .pipe(sass({ outputStyle: 'compressed' }))
+        .pipe(gulp.dest('./dist/styles/'));
 }
 
 function compressImages() {
@@ -23,7 +23,8 @@ function compressJS() {
         .pipe(gulp.dest('./dist/scripts'))
 }
 
-exports.default = function() {
+exports.default = gulp.parallel(compileSass, compressImages, compressJS);
+exports.dev = function () {
     gulp.watch('./src/styles/*.scss', { ignoreInitial: false }, gulp.series(compileSass));
     gulp.watch('./src/images/**/*', { ignoreInitial: false }, gulp.series(compressImages));
     gulp.watch('./src/scripts/*.js', { ignoreInitial: false }, gulp.series(compressJS));
